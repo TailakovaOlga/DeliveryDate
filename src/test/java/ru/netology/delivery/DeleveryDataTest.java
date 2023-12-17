@@ -13,7 +13,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-class DeliveryTest {
+class DeliveryDataTest {
 
     @BeforeEach
     void setup() {
@@ -37,9 +37,9 @@ class DeliveryTest {
         $(".button").click();
         $(Selectors.byText("Запланировать")).click();
         $(Selectors.byText("Успешно!")).shouldBe(Condition.visible, Duration.ofSeconds(15));
-        $("[data-test-id='success-notification') .notification__content")
-                .shouldHave(exactText("Встреча успешно запланирована на " + firstMeetingDate))
-                .shouldBe(visible, Duration.ofSeconds(15));
+        $(".notification_status_ok .notification__content")
+                .shouldBe(visible, Duration.ofSeconds(15))
+                .shouldHave(text("Встреча успешно запланирована на "+firstMeetingDate));
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id='date'] input").setValue(secondMeetingDate);
         $(".button").click();
